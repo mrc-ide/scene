@@ -36,16 +36,18 @@ plot_interventions <- function(interventions,
 
   intervention_colours <- intervention_colours
 
+  group_var <- c(group_var, "year")
+
   interventions <- interventions |>
-    dplyr::left_join(population, by = dplyr::join_by(group_var))
+    dplyr::left_join(population, by = group_var)
 
   # Dashed lines for ITN helpers
   lt <- rep(1, length(include))
   lt[include %in% c("itn_input_dist", "fitted_usage")] <- 2
 
-  group_var <- utils::tail(group_var, 2)
+  group_var <- setdiff(group_var, "urban_rural")
   if(country){
-    group_var <- utils::tail(group_var, 1)
+    group_var <- c("country", "iso3c", "year")
   }
 
   pd <- aggregate_df(df = interventions, groups = group_var, weighted_mean_cols = include, w = "par") |>

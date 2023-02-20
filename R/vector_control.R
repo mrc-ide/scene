@@ -73,7 +73,7 @@ link_vector_control_parameters <- function(interventions){
 
   interventions <- interventions |>
     dplyr::select(-dplyr::all_of(c("dn0", "rn0", "gamman", "rnm"))) |>
-    dplyr::left_join(ne, dplyr::join_by(closest(.data$pyrethroid_resistance >= .data$pr), .data$net_type)) |>
+    dplyr::left_join(ne, dplyr::join_by(closest(pyrethroid_resistance >= pr), net_type)) |>
     dplyr::select(-("pr")) |>
     dplyr::select(-c("ls_theta", "ls_gamma", "ks_theta", "ks_gamma", "ms_theta", "ms_gamma")) |>
     dplyr::left_join(irs_parameters, by = "irs_insecticide")
