@@ -5,11 +5,29 @@
 #'
 #' @return Combined country and admin plot
 #' @export
-plot_interventions_combined <- function(interventions, population, group_var, text = c(11, 11)){
+plot_interventions_combined <- function(interventions, population, group_var,
+                                        include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov", "rtss_cov", "smc_cov", "pmc_cov"),
+                                        labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC"),
+                                        text = c(11, 11)){
   patchwork::wrap_plots(
     list(
-      plot_interventions(interventions, population, group_var, text_size = text[1]),
-      plot_interventions(interventions, population, group_var, country = FALSE, text_size = text[2])
+      plot_interventions(
+        interventions = interventions,
+        population = population,
+        group_var = group_var,
+        text_size = text[1],
+        include = include,
+        labels = labels,
+        country = TRUE
+        ),
+      plot_interventions(
+        interventions = interventions,
+        population = population,
+        group_var = group_var,
+        text_size = text[2],
+        include = include,
+        labels = labels,
+        country = FALSE)
     )
   ) + patchwork::plot_layout(guides = "collect")
 }

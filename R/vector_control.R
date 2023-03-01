@@ -26,9 +26,10 @@ add_future_net_dist <- function(interventions, group_var, off_year_max = 0.2, cy
         target_usage = .data$itn_use,
         target_usage_timesteps = 1 + (.data$year - min(.data$year) + 0.5) * 365,
         distribution_timesteps =  1 + (.data$year - min(.data$year)) * 365,
-        distribution_init = ifelse(is.na(.data$itn_input_dist), 0.1, .data$itn_input_dist),
+        distribution_init = pmax(pmin(.data$itn_use * 0.75, .data$du), .data$dl),
         distribution_lower = .data$dl,
-        distribution_upper = .data$du
+        distribution_upper = .data$du,
+        control = list(xtol_rel = 0.01)
       )$par
     ) |>
     # Add the resulting model usage
@@ -73,7 +74,7 @@ link_vector_control_parameters <- function(interventions){
 
   interventions <- interventions |>
     dplyr::select(-dplyr::all_of(c("dn0", "rn0", "gamman", "rnm"))) |>
-    dplyr::left_join(ne, dplyr::join_by(closest(pyrethroid_resistance >= pr), net_type)) |>
+    dplyr::left_join(ne, dplyr::join_by(closest("pyrethroid_resistance" >= "pr"), "net_type")) |>
     dplyr::select(-("pr")) |>
     dplyr::select(-c("ls_theta", "ls_gamma", "ks_theta", "ks_gamma", "ms_theta", "ms_gamma")) |>
     dplyr::left_join(irs_parameters, by = "irs_insecticide")
