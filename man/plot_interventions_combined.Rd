@@ -8,6 +8,10 @@ plot_interventions_combined(
   interventions,
   population,
   group_var,
+  include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov",
+    "rtss_cov", "smc_cov", "pmc_cov"),
+  labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS",
+    "RTSS", "SMC", "PMC"),
   text = c(11, 11)
 )
 }
@@ -17,6 +21,10 @@ plot_interventions_combined(
 \item{population}{Population input}
 
 \item{group_var}{Site grouping}
+
+\item{include}{Intervention variables to include}
+
+\item{labels}{Labels for variables in include}
 
 \item{text}{vector of text size for aggregated and disaggregated plots}
 }
