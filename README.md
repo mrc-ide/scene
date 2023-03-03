@@ -13,14 +13,14 @@ public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostat
 status](https://codecov.io/gh/mrc-ide/peeps/branch/main/graph/badge.svg)](https://codecov.io/github/mrc-ide/scene)
 <!-- badges: end -->
 
-The goal of scene is to …
+A scenario builder for the Malariaverse.
 
-## Installation
-
-You can install the development version of scene from
-[GitHub](https://github.com/) with:
+To install:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("mrc-ide/scene")
 ```
+
+For an introduction please see the [future scenario
+vignette](https://mrc-ide.github.io/scene/articles/future-scenario.html)
