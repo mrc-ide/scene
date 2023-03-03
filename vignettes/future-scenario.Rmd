@@ -1,0 +1,145 @@
+---
+title: "Future scenario"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Future scenario}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(scene)
+```
+
+Using a site file in malariariaverse, we can define a future scenario by extending
+and  populating the `$interventions` section for a site to include future years.
+Scene provides helpful functions to help us build our future scenarios.
+
+Let's start with an example site. We can see the interventions sections has 
+details of the historical intervention coverage for the last 5 years:
+
+```{r, echo=FALSE}
+knitr::kable(example_site$interventions, format = "html")
+```
+
+We can plot the interventions (aggregated for the country and at the site level)
+to get an idea of what is going on:
+
+```{r, fig.height = 4, fig.width = 7}
+plot_interventions_combined(
+  interventions = example_site$interventions,
+  population = example_site$population,
+  group_var = c("country", "site"),
+  include = c("itn_use", "itn_input_dist", "tx_cov", "smc_cov"),
+  labels = c("ITN usage", "ITN model input", "Treatment","SMC")
+)
+```
+
+Let's start by creating a new site file for our new scenario. We also define
+the grouping variable(s), to inform the sites with in the site file:
+
+```{r}
+new_scenario <- example_site
+group_var <- names(new_scenario$sites)
+```
+
+We need to expand our `$interventions` section to some future years:
+
+```{r}
+# Expand the interventions for each site in the site file up to year 10
+new_scenario$interventions <- new_scenario$interventions |>
+  expand_interventions(max_year = 10, group_var = group_var)
+```
+
+After this we can begin to populate "the future" interventions for our scenario,
+we can do this be adding target change points in the `$inteventions`:
+
+```{r}
+# Add a target ITN usage of 60% in all sites by year 8
+new_scenario$interventions <- new_scenario$interventions |>
+  set_change_point(sites = new_scenario$sites, var = "itn_use", year = 8, target = 0.6)
+```
+
+We can define more specific options, restricting sites where changes will be 
+implemented:
+
+```{r}
+# Add a target PMC coverage of 80% in site A
+to_get_pmc <- new_scenario$sites[new_scenario$sites$site == "A", ]
+new_scenario$interventions <- new_scenario$interventions |>
+  set_change_point(sites = to_get_pmc, var = "pmc_cov", year = 10, target = 0.8)
+
+# Add a target SMC coverage of 50% to any sites that have previously implemented SMC
+to_get_smc <- ever_used(
+  interventions = example_site$interventions,
+  var = "smc_cov",
+  group_var = group_var
+)
+new_scenario$interventions <- new_scenario$interventions |>
+  set_change_point(sites = to_get_smc, var = "smc_cov", year = 10, target = 0.5)
+```
+
+Now we have defined our targets, we can see there are still missing values in 
+`$interventions`:
+
+```{r, echo=FALSE}
+knitr::kable(new_scenario$interventions, format = "html")
+```
+
+Let's fill them in! For some interventions we might want coverage to scale up to
+a target:
+
+```{r}
+# Linear scale up of coverage
+new_scenario$interventions <- new_scenario$interventions |>
+  linear_interpolate(vars = c("itn_use", "pmc_cov", "smc_cov"), group_var = group_var)
+```
+
+For others we may just want the previous value to be carried forward:
+
+```{r}
+new_scenario$interventions <- new_scenario$interventions |>
+  fill_extrapolate(group_var = group_var)
+```
+
+Now we have future net usage defined, we need to estimate the model input
+net distribution to achieve it. We use the `add_future_net_dist()`. Note that
+this function imposes some very specific assumptions so make sure you are 
+familiar with `netz::fit_usage()` before using!
+
+```{r}
+new_scenario$interventions <- new_scenario$interventions |>
+  add_future_net_dist(group_var = group_var)
+```
+
+Ok, now we should have a populated `$interventions`:
+
+```{r, echo=FALSE}
+knitr::kable(new_scenario$interventions, format = "html")
+```
+
+Let's inspect the interventions for our new scenario to confirm our changes have
+worked as expected:
+
+```{r, fig.height = 4, fig.width = 7}
+plot_interventions_combined(
+  interventions = new_scenario$interventions,
+  population = new_scenario$population,
+  group_var = c("country", "site"),
+  include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "smc_cov", "pmc_cov"),
+  labels = c("ITN usage", "ITN model input","ITN model usage", "Treatment","SMC", "PMC")
+)
+```
+
+We now have a fully populated new scenario. In reality, there is more complexity
+in site file interventions than shown here, but most of the principals remain the
+same. Note that the order of operations does matter - for example you can't estimate
+`itn_input_dist` before specifying `itn_use` and you can't `linear_interpolate()`
+a variable after `fill_extrapolate()`.

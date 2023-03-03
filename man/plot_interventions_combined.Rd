@@ -12,7 +12,8 @@ plot_interventions_combined(
     "rtss_cov", "smc_cov", "pmc_cov"),
   labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS",
     "RTSS", "SMC", "PMC"),
-  text = c(11, 11)
+  text = c(11, 11),
+  facet_rows = 4
 )
 }
 \arguments{
@@ -27,6 +28,8 @@ plot_interventions_combined(
 \item{labels}{Labels for variables in include}
 
 \item{text}{vector of text size for aggregated and disaggregated plots}
+
+\item{facet_rows}{Number of rows for faceted plot}
 }
 \value{
 Combined country and admin plot

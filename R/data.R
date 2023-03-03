@@ -1,3 +1,12 @@
+#' Example site
+#'
+#' An example site for demonstration
+#'
+#' @format ## `example_site`
+#' A named list of length 3.
+#'
+"example_site"
+
 #' Intervention colours
 #'
 #' Named colours for intervention plotting

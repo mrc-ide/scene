@@ -23,4 +23,5 @@ add_future_net_dist(
 \description{
 Infer cycle period (for N-yearly main distribution frequency) and fit input
 distribution, ensuring already calibrated values remain fixed). Requires `itn_input_dist`
+values that are to be fitted to be NA.
 }

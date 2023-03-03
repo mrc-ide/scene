@@ -1,6 +1,6 @@
 Package: scene
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Future Scenario Builder for the Malariaverse
 Version: 0.1.0
 Authors@R: c(
     person(
@@ -11,9 +11,7 @@ Authors@R: c(
       comment = c(ORCID = "0000-0003-3001-4959")
     )
   )
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Functionality to help define and build future scenarios for malariaverse site files.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -33,6 +31,9 @@ Imports:
     tidyr,
     zoo
 Suggests: 
+    knitr,
+    rmarkdown,
     roxygen2,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+VignetteBuilder: knitr

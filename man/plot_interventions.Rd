@@ -8,12 +8,12 @@ plot_interventions(
   interventions,
   population,
   group_var,
-  country = TRUE,
   include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov",
     "rtss_cov", "smc_cov", "pmc_cov"),
   labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS",
     "RTSS", "SMC", "PMC"),
-  text_size = 8
+  text_size = 8,
+  facet_rows = 4
 )
 }
 \arguments{
@@ -23,13 +23,13 @@ plot_interventions(
 
 \item{group_var}{Site grouping}
 
-\item{country}{Aggregate to the country level}
-
 \item{include}{Intervention variables to include}
 
 \item{labels}{Labels for variables in include}
 
 \item{text_size}{Size of font}
+
+\item{facet_rows}{Number of rows for faceted plot}
 }
 \value{
 Intervention plot

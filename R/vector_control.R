@@ -2,7 +2,7 @@
 #'
 #' Infer cycle period (for N-yearly main distribution frequency) and fit input
 #' distribution, ensuring already calibrated values remain fixed). Requires `itn_input_dist`
-# ' to be fitted to be NA.
+#' values that are to be fitted to be NA.
 #'
 #' @param interventions Site file interventions section
 #' @param group_var Site grouping
