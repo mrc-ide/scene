@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# scene
+# scene <img src="man/figures/scene.png" align="right" width=30% height=30% />
 
 <!-- badges: start -->
 
