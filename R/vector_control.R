@@ -55,7 +55,7 @@ add_future_net_dist <- function(interventions, group_var, off_year_max = 0.2, cy
 #' @export
 link_resistance <- function(interventions, pyrethroid_resistance, group_var){
   interventions <- interventions |>
-    dplyr::select(-pyrethroid_resistance) |>
+    dplyr::select(-dplyr::any_of("pyrethroid_resistance")) |>
     dplyr::left_join(pyrethroid_resistance, by = c(group_var, "year"))
   return(interventions)
 }
