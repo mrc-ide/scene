@@ -4,10 +4,10 @@
 \alias{expand_interventions}
 \title{Expand the inereventions time frame for all sites}
 \usage{
-expand_interventions(inteventions, max_year, group_var)
+expand_interventions(interventions, max_year, group_var)
 }
 \arguments{
-\item{inteventions}{Site file interventions section}
+\item{interventions}{Site file interventions section}
 
 \item{max_year}{Maximum year to expand to}
 

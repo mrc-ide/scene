@@ -9,7 +9,7 @@ test_that("expand interventions works", {
 
   expect_equal(
     expand_interventions(
-      inteventions = interventions,
+      interventions = interventions,
       max_year = 10,
       group_var = group_var),
     tibble::tibble(

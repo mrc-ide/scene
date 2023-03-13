@@ -1,14 +1,14 @@
 #' Expand the inereventions time frame for all sites
 #'
-#' @param inteventions Site file interventions section
+#' @param interventions Site file interventions section
 #' @param max_year Maximum year to expand to
 #' @param group_var Site grouping
 #'
 #' @export
-expand_interventions <- function(inteventions, max_year, group_var){
-  expanded_interventions <- inteventions |>
+expand_interventions <- function(interventions, max_year, group_var){
+  expanded_interventions <- interventions |>
     dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) |>
-    tidyr::complete(year = min(inteventions$year):max_year) |>
+    tidyr::complete(year = min(interventions$year):max_year) |>
     dplyr::ungroup() |>
     dplyr::arrange(dplyr::across(dplyr::all_of(c(group_var, "year"))))
   return(expanded_interventions)
