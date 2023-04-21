@@ -53,18 +53,12 @@ plot_interventions <- function(interventions,
                                 text_size = 8,
                                 facet_rows = 4){
 
-  intervention_colours <- intervention_colours
-
   # Assume last var is for faceting
   facet_var <- group_var[length(group_var)]
   group_var <- c(group_var, "year")
 
   interventions <- interventions |>
     dplyr::left_join(population, by = intersect(colnames(interventions), colnames(population)))
-
-  # Dashed lines for ITN helpers
-  lt <- rep(1, length(include))
-  lt[include %in% c("itn_input_dist", "fitted_usage")] <- 2
 
   pd <- aggregate_df(df = interventions, groups = group_var, weighted_mean_cols = include, w = "par") |>
     tidyr::pivot_longer(-group_var, names_to = "Intervention", values_to = "Coverage") |>
@@ -74,8 +68,8 @@ plot_interventions <- function(interventions,
     data = pd,
     ggplot2::aes(x = .data$year, y = .data$Coverage, col = .data$Intervention, linetype = .data$Intervention)
   ) +
-    ggplot2::scale_colour_manual(values = intervention_colours) +
-    ggplot2::scale_linetype_manual(values = lt) +
+    ggplot2::scale_colour_manual(values = scene::intervention_colours) +
+    ggplot2::scale_linetype_manual(values = scene::intervention_line_type) +
     ggplot2::geom_line() +
     ggplot2::theme_bw() +
     ggplot2::xlab("Year") +
