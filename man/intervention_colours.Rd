@@ -6,7 +6,7 @@
 \title{Intervention colours}
 \format{
 ## `intervention_colours`
-A named vector of length 8.
+A named vector of length 15.
 }
 \usage{
 intervention_colours

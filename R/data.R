@@ -12,9 +12,18 @@
 #' Named colours for intervention plotting
 #'
 #' @format ## `intervention_colours`
-#' A named vector of length 8.
+#' A named vector of length 15.
 #'
 "intervention_colours"
+
+#' Intervention line types
+#'
+#' Named lien types for intervention plotting
+#'
+#' @format ## `intervention_line_type`
+#' A named vector of length 15.
+#'
+"intervention_line_type"
 
 #' Net efficacy parameters
 #'
