@@ -5,11 +5,16 @@
 #'
 #' @return Combined country and admin plot
 #' @export
-plot_interventions_combined <- function(interventions, population, group_var,
-                                        include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov", "rtss_cov", "smc_cov", "pmc_cov"),
-                                        labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC"),
-                                        text = c(11, 11),
-                                        facet_rows = 4){
+plot_interventions_combined <- function(
+    interventions,
+    population,
+    group_var,
+    include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov", "rtss_cov", "smc_cov", "pmc_cov"),
+    labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC"),
+    text = c(11, 11),
+    facet_rows = 4,
+    linewidth = 1
+){
   patchwork::wrap_plots(
     list(
       plot_interventions(
@@ -19,7 +24,8 @@ plot_interventions_combined <- function(interventions, population, group_var,
         text_size = text[1],
         include = include,
         labels = labels,
-        facet_rows = facet_rows
+        facet_rows = facet_rows,
+        linewidth = linewidth
       ),
       plot_interventions(
         interventions = interventions,
@@ -28,7 +34,9 @@ plot_interventions_combined <- function(interventions, population, group_var,
         text_size = text[2],
         include = include,
         labels = labels,
-        facet_rows)
+        facet_rows = facet_rows,
+        linewidth = linewidth
+      )
     )
   ) + patchwork::plot_layout(guides = "collect")
 }
@@ -45,22 +53,31 @@ plot_interventions_combined <- function(interventions, population, group_var,
 #'
 #' @return Intervention plot
 #' @export
-plot_interventions <- function(interventions,
-                                population,
-                                group_var,
-                                include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov", "rtss_cov", "smc_cov", "pmc_cov", "lsm_cov"),
-                                labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC", "LSM"),
-                                text_size = 8,
-                                facet_rows = 4){
+plot_interventions <- function(
+    interventions,
+    population,
+    group_var,
+    include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov", "rtss_cov", "smc_cov", "pmc_cov", "lsm_cov"),
+    labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC", "LSM"),
+    text_size = 8,
+    facet_rows = 4,
+    linewidth = 1
+){
 
   # Assume last var is for faceting
   facet_var <- group_var[length(group_var)]
   group_var <- c(group_var, "year")
 
   interventions <- interventions |>
-    dplyr::left_join(population, by = intersect(colnames(interventions), colnames(population)))
+    dplyr::left_join(population, by = dplyr::intersect(colnames(interventions), colnames(population)))
 
-  pd <- aggregate_df(df = interventions, groups = group_var, weighted_mean_cols = include, w = "par") |>
+  pd <- interventions
+  if(nrow(interventions) > nrow(unique(interventions[, group_var]))){
+    pd <- scene:::aggregate_df(df = interventions, groups = group_var, weighted_mean_cols = include, w = "par")
+  }
+
+  pd <- pd |>
+    dplyr::select(dplyr::any_of(c(group_var, include))) |>
     tidyr::pivot_longer(-group_var, names_to = "Intervention", values_to = "Coverage") |>
     dplyr::mutate(Intervention = factor(.data$Intervention, levels = include, labels = labels))
 
@@ -70,7 +87,7 @@ plot_interventions <- function(interventions,
   ) +
     ggplot2::scale_colour_manual(values = scene::intervention_colours) +
     ggplot2::scale_linetype_manual(values = scene::intervention_line_type) +
-    ggplot2::geom_line() +
+    ggplot2::geom_line(linewidth = linewidth) +
     ggplot2::theme_bw() +
     ggplot2::xlab("Year") +
     ggplot2::theme(

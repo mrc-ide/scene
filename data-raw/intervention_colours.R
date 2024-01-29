@@ -2,7 +2,7 @@
 intervention_colours <- c(
   "#6923d2",
   "#6923d2",
-  "#6923d2",
+  "#f0ab00",
   "#00cfb2",
   "#001f68",
   "#00badb",
@@ -10,11 +10,10 @@ intervention_colours <- c(
   "#ec83ff",
   "#9d3f00",
   "#438300",
-  "#f0ab00",
+  "#a40076",
   "#0270c0",
   "#6e0094",
   "#342302",
-
   "#a40076"
 )
 names(intervention_colours) <- c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC", "LSM")
