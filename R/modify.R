@@ -71,7 +71,7 @@ ever_used <- function(interventions, var, group_var){
 #' @param group_var Site grouping
 #'
 #' @export
-last_used <- function(interventions, var, group_var){
+last_used <- function(interventions, var, group_var = NULL){
   interventions <- interventions |>
     dplyr::filter(!is.na(.data[[var]])) |>
     dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) |>
@@ -91,7 +91,7 @@ last_used <- function(interventions, var, group_var){
 #' @param group_var Site grouping
 #'
 #' @export
-linear_interpolate <- function(interventions, vars, group_var){
+linear_interpolate <- function(interventions, vars, group_var = NULL){
   interventions <- interventions |>
     dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) |>
     dplyr::mutate(dplyr::across(dplyr::all_of(vars), \(x) zoo::na.approx(x, na.rm = FALSE))) |>
@@ -106,7 +106,7 @@ linear_interpolate <- function(interventions, vars, group_var){
 #' @param not Character string naming Interventions not to be extrapolated
 #'
 #' @export
-fill_extrapolate <- function(interventions, group_var, not = "itn_input_dist"){
+fill_extrapolate <- function(interventions, group_var = NULL, not = "itn_input_dist"){
   f_interventions <- interventions |>
     dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) |>
     tidyr::fill(-dplyr::all_of(not), .direction = "down") |>
