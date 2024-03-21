@@ -26,19 +26,22 @@ expand_interventions <- function(interventions, max_year, group_var){
 #' @param target New value of change point
 #'
 #' @export
-set_change_point <- function(interventions, sites, var, year, target){
+set_change_point <- function(interventions, var, year, target, sites = NULL){
 
-  template <- sites
-  template$year <- year
-  template$target <- target
+  if(is.null(sites)){
+    template <- data.frame(year = year)
+  } else {
+    template <- sites
+    template$year <- year
+  }
 
-  index <- index_df(interventions, template[,c(names(sites), "year")])
+  index <- index_df(interventions, template)
 
   if(!all(is.na(interventions[index, var]))){
     stop(paste("Trying to overwrite existing value in interventions:", var))
   }
 
-  interventions[index, var] <- template$target
+  interventions[index, var] <- target
 
   return(interventions)
 }

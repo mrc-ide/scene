@@ -10,7 +10,7 @@ index_df <- function(df, filter_row) {
   indexed_df <- df |>
     dplyr::mutate(index = 1:dplyr::n())
 
-  filter_row <- filter_row[ , names(filter_row) %in% names(df)]
+  filter_row <- filter_row[ , names(filter_row) %in% names(df), drop = FALSE]
 
   row_index <- filter_row |>
     dplyr::left_join(indexed_df, by = names(filter_row), multiple = "all") |>
