@@ -50,6 +50,7 @@ plot_interventions_combined <- function(
 #' @param labels Labels for variables in include
 #' @param text_size Size of font
 #' @param facet_rows Number of rows for faceted plot
+#' @param linewidth Line width
 #'
 #' @return Intervention plot
 #' @export
@@ -73,7 +74,7 @@ plot_interventions <- function(
 
   pd <- interventions
   if(nrow(interventions) > nrow(unique(interventions[, group_var]))){
-    pd <- scene:::aggregate_df(df = interventions, groups = group_var, weighted_mean_cols = include, w = "par")
+    pd <- aggregate_df(df = interventions, groups = group_var, weighted_mean_cols = include, w = "par")
   }
 
   pd <- pd |>

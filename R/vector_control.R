@@ -20,24 +20,22 @@ add_future_net_dist <- function(interventions, group_var, off_year_max = 0.2, cy
       # Ensure future distribution are cyclical
       du = ifelse(is.na(.data$itn_input_dist), off_year_max, 1),
       du = ifelse(is.na(.data$itn_input_dist) & ((.data$year - .data$cycle_peak) %% cycle_period == 0), 1, .data$du),
-      itn_input_dist  = usage_to_model_distribution(
-        itn_use,
+      itn_input_dist = netz::usage_to_model_distribution(
+        .data$itn_use,
         1 + (.data$year - min(.data$year) + 0.5) * 365,
         1 + (.data$year - min(.data$year)) * 365,
-        distribution_upper  = du,
-        # TODO: mean retention
-        mean_retention = .data$mean_retention
+        distribution_upper  = .data$du,
+        mean_retention = .data$mean_retention[1]
       ),
-      fitted_usage = model_distribution_to_usage(
+      fitted_usage = netz::model_distribution_to_usage(
         1 + (.data$year - min(.data$year) + 0.5) * 365,
-        itn_input_dist2,
+        .data$itn_input_dist,
         1 + (.data$year - min(.data$year)) * 365,
-        # TODO: mean retention
-        mean_retention = .data$mean_retention
+        mean_retention = .data$mean_retention[1]
       )
     ) |>
     dplyr::ungroup() |>
-    dplyr::select(-c("dl", "du", "cycle_peak", "data_year"))
+    dplyr::select(-c("du", "cycle_peak", "data_year"))
   return(interventions)
 }
 
@@ -76,3 +74,5 @@ link_vector_control_parameters <- function(interventions){
     dplyr::left_join(irs_parameters, by = "irs_insecticide")
   return(interventions)
 }
+
+utils::globalVariables("closest")

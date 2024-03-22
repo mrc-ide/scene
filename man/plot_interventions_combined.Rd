@@ -13,7 +13,8 @@ plot_interventions_combined(
   labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS",
     "RTSS", "SMC", "PMC"),
   text = c(11, 11),
-  facet_rows = 4
+  facet_rows = 4,
+  linewidth = 1
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ plot_interventions_combined(
 \item{text}{vector of text size for aggregated and disaggregated plots}
 
 \item{facet_rows}{Number of rows for faceted plot}
+
+\item{linewidth}{Line width}
 }
 \value{
 Combined country and admin plot

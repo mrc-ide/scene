@@ -4,7 +4,7 @@
 \alias{last_used}
 \title{Select areas that have used an intervention in the last year with data}
 \usage{
-last_used(interventions, var, group_var)
+last_used(interventions, var, group_var = NULL)
 }
 \arguments{
 \item{interventions}{Site file interventions section}

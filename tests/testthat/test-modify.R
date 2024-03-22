@@ -8,11 +8,13 @@ test_that("expand interventions works", {
   group_var = "level1"
 
   expect_equal(
-    expand_interventions(
-      interventions = interventions,
-      max_year = 10,
-      group_var = group_var),
-    tibble::tibble(
+    as.data.frame(
+      expand_interventions(
+        interventions = interventions,
+        max_year = 10,
+        group_var = group_var)
+    ),
+    data.frame(
       level1 = rep(c("A", "B"), each = 10),
       year = rep(1:10, 2),
       var1 = rep(c(1:2, rep(NA, 8)), 2)
@@ -69,23 +71,27 @@ test_that("ever and last used works", {
   )
 
   expect_equal(
-    ever_used(
-      interventions = interventions,
-      var = "var1",
-      group_var = "level1"
+    as.data.frame(
+      ever_used(
+        interventions = interventions,
+        var = "var1",
+        group_var = "level1"
+      )
     ),
-    tibble::tibble(
+    data.frame(
       level1 = c("B", "C")
     )
   )
 
   expect_equal(
-    last_used(
-      interventions = interventions,
-      var = "var1",
-      group_var = "level1"
+    as.data.frame(
+      last_used(
+        interventions = interventions,
+        var = "var1",
+        group_var = "level1"
+      )
     ),
-    tibble::tibble(
+    data.frame(
       level1 = c("B")
     )
   )
@@ -99,12 +105,14 @@ test_that("interpolation and fill works", {
   )
 
   expect_equal(
-    linear_interpolate(
-      interventions = interventions,
-      vars = "var1",
-      group_var = "level1"
+    as.data.frame(
+      linear_interpolate(
+        interventions = interventions,
+        vars = "var1",
+        group_var = "level1"
+      )
     ),
-    tibble::tibble(
+    data.frame(
       level1 = rep(c("A", "B"), each = 4),
       year = rep(1:4, 2),
       var1 = rep(c(1:2, 3, 4), 2)
@@ -118,12 +126,14 @@ test_that("interpolation and fill works", {
   )
 
   expect_equal(
-    fill_extrapolate(
-      interventions = interventions,
-      group_var = "level1",
-      not = NULL
+    as.data.frame(
+      fill_extrapolate(
+        interventions = interventions,
+        group_var = "level1",
+        not = NULL
+      )
     ),
-    tibble::tibble(
+    data.frame(
       level1 = rep(c("A", "B"), each = 4),
       year = rep(1:4, 2),
       var1 = rep(c(1:2, 2, 2), 2)

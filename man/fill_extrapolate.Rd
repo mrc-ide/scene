@@ -4,7 +4,7 @@
 \alias{fill_extrapolate}
 \title{Extrapolation of any NAs with previous value}
 \usage{
-fill_extrapolate(interventions, group_var, not = "itn_input_dist")
+fill_extrapolate(interventions, group_var = NULL, not = "itn_input_dist")
 }
 \arguments{
 \item{interventions}{Site file interventions section}
