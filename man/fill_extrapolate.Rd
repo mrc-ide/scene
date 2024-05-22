@@ -4,7 +4,12 @@
 \alias{fill_extrapolate}
 \title{Extrapolation of any NAs with previous value}
 \usage{
-fill_extrapolate(interventions, group_var = NULL, not = "itn_input_dist")
+fill_extrapolate(
+  interventions,
+  group_var = NULL,
+  not = "itn_input_dist",
+  dir = "down"
+)
 }
 \arguments{
 \item{interventions}{Site file interventions section}
@@ -12,6 +17,8 @@ fill_extrapolate(interventions, group_var = NULL, not = "itn_input_dist")
 \item{group_var}{Site grouping}
 
 \item{not}{Character string naming Interventions not to be extrapolated}
+
+\item{dir}{Direction ("down" or "up")}
 }
 \description{
 Extrapolation of any NAs with previous value

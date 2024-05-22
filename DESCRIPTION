@@ -1,7 +1,7 @@
 Package: scene
 Type: Package
 Title: Future Scenario Builder for the Malariaverse
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: c(
     person(
       given = "Pete",

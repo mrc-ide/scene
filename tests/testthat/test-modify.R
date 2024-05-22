@@ -139,4 +139,27 @@ test_that("interpolation and fill works", {
       var1 = rep(c(1:2, 2, 2), 2)
     )
   )
+
+  interventions <- data.frame(
+    level1 = rep(c("A", "B"), each = 4),
+    year = rep(1:4, 2),
+    var1 = rep(c(NA, NA, 1, 2), 2)
+  )
+
+
+  expect_equal(
+    as.data.frame(
+      fill_extrapolate(
+        interventions = interventions,
+        group_var = "level1",
+        not = NULL,
+        dir = "up"
+      )
+    ),
+    data.frame(
+      level1 = rep(c("A", "B"), each = 4),
+      year = rep(1:4, 2),
+      var1 = rep(c(1, 1, 1:2), 2)
+    )
+  )
 })

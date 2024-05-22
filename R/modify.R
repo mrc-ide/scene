@@ -104,12 +104,13 @@ linear_interpolate <- function(interventions, vars, group_var = NULL){
 #' @param interventions Site file interventions section
 #' @param group_var Site grouping
 #' @param not Character string naming Interventions not to be extrapolated
+#' @param dir Direction ("down" or "up")
 #'
 #' @export
-fill_extrapolate <- function(interventions, group_var = NULL, not = "itn_input_dist"){
+fill_extrapolate <- function(interventions, group_var = NULL, not = "itn_input_dist", dir = "down"){
   f_interventions <- interventions |>
     dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) |>
-    tidyr::fill(-dplyr::all_of(not), .direction = "down") |>
+    tidyr::fill(-dplyr::all_of(not), .direction = dir) |>
     dplyr::ungroup()
   return(f_interventions)
 }
