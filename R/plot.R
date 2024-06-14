@@ -9,8 +9,8 @@ plot_interventions_combined <- function(
     interventions,
     population,
     group_var,
-    include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov", "rtss_cov", "smc_cov", "pmc_cov"),
-    labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC"),
+    include = c("itn_use", "itn_input_dist", "predicted_use", "tx_cov", "irs_cov", "rtss_cov", "r21_cov", "smc_cov"),
+    labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "R21", "SMC"),
     text = c(11, 11),
     facet_rows = 4,
     linewidth = 1
@@ -58,8 +58,8 @@ plot_interventions <- function(
     interventions,
     population,
     group_var,
-    include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov", "rtss_cov", "smc_cov", "pmc_cov", "lsm_cov"),
-    labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC", "LSM"),
+    include = c("itn_use", "itn_input_dist", "predicted_use", "tx_cov", "irs_cov", "rtss_cov", "r21_cov", "smc_cov"),
+    labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "R21", "SMC"),
     text_size = 8,
     facet_rows = 4,
     linewidth = 1
