@@ -1,84 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/future-scenario.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_future_net_dist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/aggregate_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ever_used.html</loc>
-  </url>
-  <url>
-    <loc>/reference/example_site.html</loc>
-  </url>
-  <url>
-    <loc>/reference/expand_interventions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fill_extrapolate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/intervention_colours.html</loc>
-  </url>
-  <url>
-    <loc>/reference/intervention_line_type.html</loc>
-  </url>
-  <url>
-    <loc>/reference/irs_parameters.html</loc>
-  </url>
-  <url>
-    <loc>/reference/last_used.html</loc>
-  </url>
-  <url>
-    <loc>/reference/linear_interpolate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/link_resistance.html</loc>
-  </url>
-  <url>
-    <loc>/reference/link_vector_control_parameters.html</loc>
-  </url>
-  <url>
-    <loc>/reference/net_efficacy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_interventions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_interventions_combined.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_change_point.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tidyeval.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/future-scenario.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/add_future_net_dist.html</loc></url>
+<url><loc>/reference/aggregate_df.html</loc></url>
+<url><loc>/reference/ever_used.html</loc></url>
+<url><loc>/reference/example_site.html</loc></url>
+<url><loc>/reference/expand_interventions.html</loc></url>
+<url><loc>/reference/fill_extrapolate.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/index_df.html</loc></url>
+<url><loc>/reference/intervention_colours.html</loc></url>
+<url><loc>/reference/intervention_line_type.html</loc></url>
+<url><loc>/reference/irs_parameters.html</loc></url>
+<url><loc>/reference/last_used.html</loc></url>
+<url><loc>/reference/linear_interpolate.html</loc></url>
+<url><loc>/reference/link_resistance.html</loc></url>
+<url><loc>/reference/link_vector_control_parameters.html</loc></url>
+<url><loc>/reference/net_efficacy.html</loc></url>
+<url><loc>/reference/plot_interventions.html</loc></url>
+<url><loc>/reference/plot_interventions_combined.html</loc></url>
+<url><loc>/reference/set_change_point.html</loc></url>
+<url><loc>/reference/tidyeval.html</loc></url>
 </urlset>
+
