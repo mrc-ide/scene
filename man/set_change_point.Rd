@@ -4,18 +4,18 @@
 \alias{set_change_point}
 \title{Set an intervention change point}
 \usage{
-set_change_point(interventions, sites, var, year, target)
+set_change_point(interventions, var, year, target, sites = NULL)
 }
 \arguments{
 \item{interventions}{Site file interventions section}
-
-\item{sites}{Site reference to modify at}
 
 \item{var}{Interventions variable to modify}
 
 \item{year}{Year of change point}
 
 \item{target}{New value of change point}
+
+\item{sites}{Site reference to modify at}
 }
 \description{
 Modifies the site file interventions section with a new change point for an intervention

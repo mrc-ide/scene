@@ -26,15 +26,17 @@ test_that("data.frame aggregation works", {
   )
 
   expect_equal(
-    aggregate_df(
-      df = df,
-      groups = "group",
-      sum_cols = "to_sum",
-      mean_cols = "to_average",
-      weighted_mean_cols = "to_weighted_average",
-      w = "weights"
+    as.data.frame(
+      aggregate_df(
+        df = df,
+        groups = "group",
+        sum_cols = "to_sum",
+        mean_cols = "to_average",
+        weighted_mean_cols = "to_weighted_average",
+        w = "weights"
+      )
     ),
-    tibble::tibble(
+    data.frame(
       group = c("A", "B"),
       to_sum = c(sum(1:2), sum(3:4)),
       to_average = c(mean(1:2), mean(3:4)),

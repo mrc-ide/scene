@@ -3,7 +3,8 @@ test_that("Future net distribution works", {
     level1 = "A",
     year = 2001:2010,
     itn_use = c(0, 0, 0, 0, 0.4, 0.3, 0.8, 1, 0.9, 0.9),
-    itn_input_dist = c(0, 0, 0, 0, 0.5, 0.6, 0.1, NA, NA, NA)
+    itn_input_dist = c(0, 0, 0, 0, 0.5, 0.6, 0.1, NA, NA, NA),
+    mean_retention = 1000
   )
 
   fit1 <- add_future_net_dist(

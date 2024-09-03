@@ -4,7 +4,7 @@
 \alias{linear_interpolate}
 \title{Linearly interpolate NAs points}
 \usage{
-linear_interpolate(interventions, vars, group_var)
+linear_interpolate(interventions, vars, group_var = NULL)
 }
 \arguments{
 \item{interventions}{Site file interventions section}

@@ -9,8 +9,8 @@ plot_interventions_combined <- function(
     interventions,
     population,
     group_var,
-    include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov", "rtss_cov", "smc_cov", "pmc_cov"),
-    labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC"),
+    include = c("itn_use", "itn_input_dist", "predicted_use", "tx_cov", "irs_cov", "rtss_cov", "r21_cov", "smc_cov"),
+    labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "R21", "SMC"),
     text = c(11, 11),
     facet_rows = 4,
     linewidth = 1
@@ -50,6 +50,7 @@ plot_interventions_combined <- function(
 #' @param labels Labels for variables in include
 #' @param text_size Size of font
 #' @param facet_rows Number of rows for faceted plot
+#' @param linewidth Line width
 #'
 #' @return Intervention plot
 #' @export
@@ -57,8 +58,8 @@ plot_interventions <- function(
     interventions,
     population,
     group_var,
-    include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov", "rtss_cov", "smc_cov", "pmc_cov", "lsm_cov"),
-    labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC", "LSM"),
+    include = c("itn_use", "itn_input_dist", "predicted_use", "tx_cov", "irs_cov", "rtss_cov", "r21_cov", "smc_cov"),
+    labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "R21", "SMC"),
     text_size = 8,
     facet_rows = 4,
     linewidth = 1
@@ -73,7 +74,7 @@ plot_interventions <- function(
 
   pd <- interventions
   if(nrow(interventions) > nrow(unique(interventions[, group_var]))){
-    pd <- scene:::aggregate_df(df = interventions, groups = group_var, weighted_mean_cols = include, w = "par")
+    pd <- aggregate_df(df = interventions, groups = group_var, weighted_mean_cols = include, w = "par")
   }
 
   pd <- pd |>

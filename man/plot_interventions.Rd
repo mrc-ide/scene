@@ -8,12 +8,13 @@ plot_interventions(
   interventions,
   population,
   group_var,
-  include = c("itn_use", "itn_input_dist", "fitted_usage", "tx_cov", "irs_cov",
-    "rtss_cov", "smc_cov", "pmc_cov", "lsm_cov"),
+  include = c("itn_use", "itn_input_dist", "predicted_use", "tx_cov", "irs_cov",
+    "rtss_cov", "r21_cov", "smc_cov"),
   labels = c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS",
-    "RTSS", "SMC", "PMC", "LSM"),
+    "RTSS", "R21", "SMC"),
   text_size = 8,
-  facet_rows = 4
+  facet_rows = 4,
+  linewidth = 1
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ plot_interventions(
 \item{text_size}{Size of font}
 
 \item{facet_rows}{Number of rows for faceted plot}
+
+\item{linewidth}{Line width}
 }
 \value{
 Intervention plot
