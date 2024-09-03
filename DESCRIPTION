@@ -1,7 +1,7 @@
 Package: scene
 Type: Package
 Title: Future Scenario Builder for the Malariaverse
-Version: 0.1.4
+Version: 1.0.0
 Authors@R: c(
     person(
       given = "Pete",
@@ -15,7 +15,7 @@ Description: Functionality to help define and build future scenarios for malaria
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Remotes:
   mrc-ide/netz
 Depends: 
