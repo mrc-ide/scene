@@ -26,19 +26,22 @@ expand_interventions <- function(interventions, max_year, group_var){
 #' @param target New value of change point
 #'
 #' @export
-set_change_point <- function(interventions, sites, var, year, target){
+set_change_point <- function(interventions, var, year, target, sites = NULL){
 
-  template <- sites
-  template$year <- year
-  template$target <- target
+  if(is.null(sites)){
+    template <- data.frame(year = year)
+  } else {
+    template <- sites
+    template$year <- year
+  }
 
-  index <- index_df(interventions, template[,c(names(sites), "year")])
+  index <- index_df(interventions, template)
 
   if(!all(is.na(interventions[index, var]))){
     stop(paste("Trying to overwrite existing value in interventions:", var))
   }
 
-  interventions[index, var] <- template$target
+  interventions[index, var] <- target
 
   return(interventions)
 }
@@ -68,7 +71,7 @@ ever_used <- function(interventions, var, group_var){
 #' @param group_var Site grouping
 #'
 #' @export
-last_used <- function(interventions, var, group_var){
+last_used <- function(interventions, var, group_var = NULL){
   interventions <- interventions |>
     dplyr::filter(!is.na(.data[[var]])) |>
     dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) |>
@@ -88,7 +91,7 @@ last_used <- function(interventions, var, group_var){
 #' @param group_var Site grouping
 #'
 #' @export
-linear_interpolate <- function(interventions, vars, group_var){
+linear_interpolate <- function(interventions, vars, group_var = NULL){
   interventions <- interventions |>
     dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) |>
     dplyr::mutate(dplyr::across(dplyr::all_of(vars), \(x) zoo::na.approx(x, na.rm = FALSE))) |>
@@ -101,12 +104,13 @@ linear_interpolate <- function(interventions, vars, group_var){
 #' @param interventions Site file interventions section
 #' @param group_var Site grouping
 #' @param not Character string naming Interventions not to be extrapolated
+#' @param dir Direction ("down" or "up")
 #'
 #' @export
-fill_extrapolate <- function(interventions, group_var, not = "itn_input_dist"){
+fill_extrapolate <- function(interventions, group_var = NULL, not = "itn_input_dist", dir = "down"){
   f_interventions <- interventions |>
     dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) |>
-    tidyr::fill(-dplyr::all_of(not), .direction = "down") |>
+    tidyr::fill(-dplyr::all_of(not), .direction = dir) |>
     dplyr::ungroup()
   return(f_interventions)
 }

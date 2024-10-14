@@ -16,7 +16,7 @@ intervention_colours <- c(
   "#342302",
   "#a40076"
 )
-names(intervention_colours) <- c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC", "LSM")
+names(intervention_colours) <- c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC", "LSM", "R21")
 usethis::use_data(intervention_colours, overwrite = TRUE)
 
 # Link intervention outputs to set line types
@@ -37,5 +37,5 @@ intervention_line_type <- c(
   1,
   1
 )
-names(intervention_line_type) <- c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC", "LSM")
+names(intervention_line_type) <- c("ITN usage", "ITN model input", "ITN model usage", "Treatment", "IRS", "RTSS", "SMC", "PMC", "LSM", "R21")
 usethis::use_data(intervention_line_type, overwrite = TRUE)
